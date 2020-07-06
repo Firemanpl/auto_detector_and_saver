@@ -1,4 +1,4 @@
-# Noise-Tolerant High Performance Motion Detector (borrowed from someone [link to owner](https://github.com/bwsw/rt-motion-detection-opencv-python))
+# Noise-Tolerant High Performance Motion Detector (borrowed from someone [LINK TO OWNER](https://github.com/bwsw/rt-motion-detection-opencv-python))
 
 The motion detector presented here is developed to be noise-tolerant &ndash; webcam noise, light noise, athmosphere turbulence noise, different kinds of tremblings can be successfully handled.
 
