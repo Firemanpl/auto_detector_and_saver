@@ -1,4 +1,4 @@
-# Noise-Tolerant High Performance Motion Detector
+# Noise-Tolerant High Performance Motion Detector (borrowed from someone)
 
 The motion detector presented here is developed to be noise-tolerant &ndash; webcam noise, light noise, athmosphere turbulence noise, different kinds of tremblings can be successfully handled.
 
