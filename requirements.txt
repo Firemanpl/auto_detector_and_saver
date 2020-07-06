@@ -1,0 +1,6 @@
+rectpack
+numba
+opencv-python
+numpy
+icc_rt
+setuptools
