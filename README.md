@@ -2,11 +2,6 @@
 
 The motion detector presented here is developed to be noise-tolerant &ndash; webcam noise, light noise, athmosphere turbulence noise, different kinds of tremblings can be successfully handled.
 
-You can download the video clip which is used in the demo at: https://box.bw-sw.com/f/c629c692d5c04b7caac6/?dl
-
-Place it in the `tmp` directory.
-
-Algorithm demonstration video screencast can be found at: https://youtu.be/FCme11alEmc
 
 ## Build the project
 
