@@ -8,24 +8,25 @@ from datetime import datetime
 
 def filter_fun(b):
     return ((b[2] - b[0]) * (b[3] - b[1])) > 1000
-
+t=0
+saved_time=0
+lock1=0
 
 if __name__ == "__main__":
-    now = datetime.now()
+   
     cap = cv2.VideoCapture(0)
     #cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-    #cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
-    fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    output ="backup/backup_" + now.strftime("%d""." "%m" "." "%Y" "_" "%X") +".avi"
-    print(output)
-    out = cv2.VideoWriter(output,fourcc, 20.0, (640,480))
-    
+    #cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)      
     detector = MotionDetector(bg_history=20,
                               brightness_discard_level=25,
                               bg_subs_scale_percent=0.1,
                               group_boxes=True,
                               expansion_step=5)
-
+    now = datetime.now()
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    output ="backup/backup_" + now.strftime("%d""." "%m" "." "%Y" "_" "%X") +".avi"
+    print(output)
+    out = cv2.VideoWriter(output,fourcc, 20.0, (640,480))
     # group_boxes=True can be used if one wants to get less boxes, which include all overlapping boxes
 
     b_height = 512
@@ -34,8 +35,10 @@ if __name__ == "__main__":
     res = []
     while True:
         dt = datetime.now()
-
+        
         cpu = CPUTemperature()
+        
+        
         # Capture frame-by-frame
         ret, frame = cap.read()
         if frame is None:
@@ -43,7 +46,6 @@ if __name__ == "__main__":
         begin = time()
         boxes = detector.detect(frame)
 
-        
         frame = cv2.putText(frame, dt.strftime("%x" " " "%X"),(0, 475),cv2.FONT_HERSHEY_DUPLEX, 1,(0, 255, 0),1, cv2.LINE_8) 
         # boxes hold all boxes around motion parts
 
@@ -74,7 +76,17 @@ if __name__ == "__main__":
         cv2.imshow('last_frame', frame)
         cv2.imshow('detect_frame', detector.detection_boxed)
         cv2.imshow('diff_frame', detector.color_movement)
-        if len(boxes) > 0: 
+        if t>0:
+            actual_time = int(round(time() * 1000))
+            if actual_time - saved_time>=1000: 
+                t -= 1
+                saved_time=actual_time
+                print(t)
+
+
+        if len(boxes) > 0:
+            t=15
+        if t>0:
             out.write(frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
